@@ -11,12 +11,15 @@ services:
       - key: PYTHON_VERSION
         value: 3.9.0
 
-  - type: web
-    name: todo-frontend
-    env: node
+staticSites:
+  - name: todo-frontend
     rootDir: frontend
     buildCommand: npm install && npm run build
-    startCommand: npx serve -s dist -l $PORT
+    publishDir: dist
     envVars:
       - key: VITE_API_URL
         sync: false
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
