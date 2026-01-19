@@ -11,12 +11,11 @@ services:
       - key: PYTHON_VERSION
         value: 3.9.0
 
-  - type: web
-    name: todo-frontend
-    env: static
+staticSites:
+  - name: todo-frontend
     rootDir: frontend
     buildCommand: npm install && npm run build
-    staticPublishPath: ./dist
+    publishDir: dist
     envVars:
       - key: VITE_API_URL
         fromService: todo-backend
